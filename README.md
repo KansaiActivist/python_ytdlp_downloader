@@ -1,0 +1,2 @@
+# python_ytdlp_downloader
+Pythonを使用し軽量で簡単にYouTube動画をダウンロードする。単一ファイルのみ使用。
