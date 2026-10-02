@@ -1,21 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-YouTube 高画質ダウンローダー(単一ファイル・完全ローカル動作)
-
-必要なもの:
-    pip install yt-dlp
-    ffmpeg (映像+音声の結合に必要。PATHが通っている必要があります)
-        Windows: https://www.gyan.dev/ffmpeg/builds/ からダウンロードしPATHに追加
-        Mac:     brew install ffmpeg
-        Linux:   sudo apt install ffmpeg  など
-
-起動方法:
-    python youtube_downloader.py
-
-このアプリは完全にローカルで動作し、YouTube以外の外部サーバーへは
-動画取得のためにのみ接続します(ダウンロード自体はローカルに保存されます)。
-"""
 
 import os
 import sys
@@ -68,11 +52,9 @@ class DownloaderApp:
                 "Linux: sudo apt install ffmpeg",
             )
 
-    # ---------- UI構築 ----------
     def _build_ui(self):
         pad = {"padx": 12, "pady": 6}
 
-        # URL入力
         url_frame = tk.LabelFrame(self.root, text="動画URL", padx=8, pady=8)
         url_frame.pack(fill="x", **pad)
         self.url_var = tk.StringVar()
@@ -80,7 +62,6 @@ class DownloaderApp:
             fill="x", ipady=4
         )
 
-        # 画質選択
         quality_frame = tk.LabelFrame(self.root, text="画質", padx=8, pady=8)
         quality_frame.pack(fill="x", **pad)
         self.quality_var = tk.StringVar(value="best")
@@ -96,7 +77,6 @@ class DownloaderApp:
                 quality_frame, text=label, variable=self.quality_var, value=val
             ).pack(anchor="w")
 
-        # 保存先
         save_frame = tk.LabelFrame(self.root, text="保存先フォルダ", padx=8, pady=8)
         save_frame.pack(fill="x", **pad)
         self.save_var = tk.StringVar(value=self.save_dir)
@@ -109,7 +89,6 @@ class DownloaderApp:
             side="left", padx=(8, 0)
         )
 
-        # ダウンロードボタン
         self.download_btn = tk.Button(
             self.root,
             text="ダウンロード開始",
@@ -134,7 +113,6 @@ class DownloaderApp:
             self.save_dir = d
             self.save_var.set(d)
 
-    # ---------- ダウンロード処理 ----------
     def _start_download(self):
         if self.is_downloading:
             return
